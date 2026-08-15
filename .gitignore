@@ -1,0 +1,7 @@
+node_modules/
+target/
+.env
+backend/data/db/
+.ds_store
+dist/
+.idea/

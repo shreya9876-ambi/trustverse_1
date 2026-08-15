@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: trustverse-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=trustverse
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+    container_name: trustverse-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/trustverse
+      - AI_SERVICE_URL=http://ai-service:8000
+      - POLYGON_AMOY_RPC_URL=https://rpc-amoy.polygon.technology
+    depends_on:
+      - mongodb
+      - ai-service
+
+  ai-service:
+    build:
+      context: ./ai-service
+    container_name: trustverse-ai-service
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: trustverse-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
