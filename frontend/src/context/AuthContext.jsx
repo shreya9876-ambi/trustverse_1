@@ -25,13 +25,13 @@ export const DEMO_ACCOUNTS = {
     walletAddress: '0x3C44CdD1605330166787697201e857465239e761'
   },
   VERIFIER: {
-    id: 'demo_verifier_acme',
-    name: 'Acme Corp Talent Acquisition',
-    email: 'verifier@acme.com',
+    id: 'demo_verifier_portal',
+    name: 'Verifier',
+    email: 'verifier@trustverse.io',
     password: 'VerifierPass123!',
     role: 'ROLE_VERIFIER',
-    organization: 'Acme Technologies Inc.',
-    did: 'did:trustverse:verifier:acmecorp',
+    organization: 'Verification Authority',
+    did: 'did:trustverse:verifier:authority',
     walletAddress: '0x90F79bf6EB2c4f870365E785982E1f101E93b906'
   },
   ADMIN: {
@@ -40,7 +40,7 @@ export const DEMO_ACCOUNTS = {
     email: 'admin@trustverse.io',
     password: 'AdminPass123!',
     role: 'ROLE_ADMIN',
-    organization: 'TrustVerse Foundation',
+    organization: 'TrustVerse Platform',
     did: 'did:trustverse:admin:sys01',
     walletAddress: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
   }
@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('trustverse_user', JSON.stringify(data.user));
       return data.user;
     } catch (err) {
-      // Fallback demo account matcher for quick prototype login
       let matched = Object.values(DEMO_ACCOUNTS).find(a => a.email === email);
       if (!matched) matched = DEMO_ACCOUNTS.ISSUER;
       const demoToken = 'demo_token_' + matched.role.toLowerCase();

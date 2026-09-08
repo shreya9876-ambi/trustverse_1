@@ -19,9 +19,16 @@ export default {
           800: '#312E81',
           900: '#1E1B4B',
         },
+        darkbg: {
+          950: '#070a14',
+          900: '#0b0f19',
+          850: '#0f1627',
+          800: '#141d33',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
       },
     },
   },

@@ -32,7 +32,6 @@ export const IssuerAuth = ({ mode = 'login' }) => {
       await login(email, password);
       navigate('/issuer/dashboard');
     } catch (err) {
-      // Fallback demo login
       switchDemoRole('ISSUER');
       navigate('/issuer/dashboard');
     } finally {
@@ -41,23 +40,23 @@ export const IssuerAuth = ({ mode = 'login' }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto py-10 space-y-6">
-      <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+    <div className="max-w-md mx-auto py-10 space-y-6 animate-fade-in">
+      <div className="glass-card rounded-3xl p-8 border border-indigo-500/30 shadow-2xl space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center mx-auto shadow-md shadow-indigo-200">
-            <Building2 className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-2xl bg-indigo-950/80 border border-indigo-500/40 text-indigo-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+            <Building2 className="w-7 h-7" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="text-2xl font-display font-bold text-white tracking-tight">
             {mode === 'login' ? 'Issuer Portal Sign In' : 'Issuer Organization Registration'}
           </h1>
-          <p className="text-xs text-slate-500">Dedicated Portal for Universities, Employers & Authorities</p>
+          <p className="text-xs text-slate-400">Dedicated Authority Portal for Issuing Credentials</p>
         </div>
 
         {/* Demo Preset Button */}
-        <div className="p-3 rounded-xl bg-indigo-50/70 border border-indigo-100 flex items-center justify-between text-xs">
+        <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-center justify-between text-xs">
           <div>
-            <span className="font-bold text-indigo-950 block">Preset Demo Issuer</span>
-            <span className="text-indigo-700 text-[11px]">PCCOER University Registrar</span>
+            <span className="font-bold text-white block">Preset Demo Issuer</span>
+            <span className="text-indigo-300 text-[11px] font-mono">PCCOER University Registrar</span>
           </div>
           <button
             type="button"
@@ -65,7 +64,7 @@ export const IssuerAuth = ({ mode = 'login' }) => {
               setEmail(DEMO_ACCOUNTS.ISSUER.email);
               setPassword(DEMO_ACCOUNTS.ISSUER.password);
             }}
-            className="px-3 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[11px]"
+            className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[11px] transition-all shadow-[0_0_10px_rgba(99,102,241,0.3)]"
           >
             Auto Fill
           </button>
@@ -74,56 +73,65 @@ export const IssuerAuth = ({ mode = 'login' }) => {
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           {mode === 'register' && (
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Organization Name</label>
+              <label className="block font-semibold text-slate-300 mb-1">Organization Name</label>
               <input
                 type="text"
                 value={orgName}
                 onChange={(e) => setOrgName(e.target.value)}
                 required
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all"
               />
             </div>
           )}
 
           <div>
-            <label className="block font-semibold text-slate-700 mb-1">Issuer Email Address</label>
+            <label className="block font-semibold text-slate-300 mb-1">Issuer Email Address</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all"
             />
           </div>
 
           <div>
-            <label className="block font-semibold text-slate-700 mb-1">Password</label>
+            <label className="block font-semibold text-slate-300 mb-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-md flex items-center justify-center space-x-2 transition-all"
+            className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-display font-bold text-xs shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all flex items-center justify-center space-x-2"
           >
-            <span>{loading ? 'Authenticating...' : mode === 'login' ? 'Sign In to Issuer Portal' : 'Register Institution'}</span>
+            <span>{loading ? 'Authenticating...' : mode === 'login' ? 'Sign In as Issuer' : 'Register Organization'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <div className="pt-2 text-center text-xs text-slate-500 flex justify-between border-t border-slate-100">
+        <div className="text-center pt-2 border-t border-slate-800 text-xs text-slate-400">
           {mode === 'login' ? (
-            <Link to="/issuer/register" className="text-indigo-600 font-semibold hover:underline">New Issuer? Register Institution</Link>
+            <p>
+              New Institution?{' '}
+              <Link to="/issuer/register" className="text-indigo-400 font-bold hover:underline">
+                Register as Issuer
+              </Link>
+            </p>
           ) : (
-            <Link to="/issuer/login" className="text-indigo-600 font-semibold hover:underline">Already Registered? Sign In</Link>
+            <p>
+              Already Registered?{' '}
+              <Link to="/issuer/login" className="text-indigo-400 font-bold hover:underline">
+                Sign In
+              </Link>
+            </p>
           )}
-          <Link to="/auth/select-role" className="text-slate-400 hover:text-slate-600">Switch Role Portal</Link>
         </div>
       </div>
     </div>
