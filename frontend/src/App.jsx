@@ -41,7 +41,7 @@ function AppContent() {
   const showFooter = location.pathname === '/' && !user;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#070a14] text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
+    <div className="min-h-screen flex flex-col bg-[#06141B] text-[#CCD0CF] font-sans selection:bg-[#4A9C8A] selection:text-[#06141B]">
       <Navbar />
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Routes>

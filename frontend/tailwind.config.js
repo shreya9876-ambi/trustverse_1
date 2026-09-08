@@ -7,28 +7,47 @@ export default {
   theme: {
     extend: {
       colors: {
+        /* ── Ocean-Steel Palette ── */
         trust: {
-          50: '#F0F5FF',
-          100: '#E0EAFF',
-          200: '#C7D7FE',
-          300: '#A4BCFD',
-          400: '#7A96FC',
-          500: '#4F46E5',
-          600: '#4338CA',
-          700: '#3730A3',
-          800: '#312E81',
-          900: '#1E1B4B',
+          50:  '#CCD0CF',
+          100: '#9BA8AB',
+          200: '#4A5C6A',
+          300: '#253745',
+          400: '#11212D',
+          500: '#06141B',
+          600: '#06141B',
+          700: '#06141B',
+          800: '#06141B',
+          900: '#06141B',
+        },
+        // Named aliases for easy use in JSX
+        navy: {
+          950: '#06141B',
+          900: '#11212D',
+          800: '#253745',
+          700: '#4A5C6A',
+          600: '#4A9C8A',
+        },
+        steel: {
+          300: '#CCD0CF',
+          400: '#9BA8AB',
+          500: '#4A5C6A',
+        },
+        teal: {
+          400: '#6BBFAD',
+          500: '#4A9C8A',
         },
         darkbg: {
-          950: '#070a14',
-          900: '#0b0f19',
-          850: '#0f1627',
-          800: '#141d33',
+          950: '#06141B',
+          900: '#11212D',
+          850: '#1B2D3A',
+          800: '#253745',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        sans:    ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
+        mono:    ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
     },
   },

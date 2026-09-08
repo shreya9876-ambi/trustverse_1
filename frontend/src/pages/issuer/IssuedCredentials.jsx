@@ -40,10 +40,10 @@ export const IssuedCredentials = () => {
   };
 
   const handleRevoke = async (id) => {
-    if (!window.confirm('Are you sure you want to revoke this credential on Polygon Amoy?')) return;
+    if (!window.confirm('Are you sure you want to revoke this credential on the decentralized ledger?')) return;
     try {
       await api.revokeCredential(id, 'Issuer decision - Administrative revocation', token);
-      alert('Credential revoked on Polygon Amoy!');
+      alert('Credential revoked on the decentralized ledger!');
       fetchList();
     } catch (err) {
       alert('Revocation failed: ' + err.message);
@@ -55,7 +55,7 @@ export const IssuedCredentials = () => {
   };
 
   // Demo fallback credentials if empty database
-  const displayCreds = credentials.length > 0 ? credentials : [
+  const fallbackCreds = [
     {
       id: 'cred_edu_2026_001',
       credentialId: 'cred_edu_2026_001',
@@ -82,6 +82,27 @@ export const IssuedCredentials = () => {
       timestamp: '2026-08-17 • 11:20 UTC',
       claims: { Designation: 'Senior Engineer', Experience: '4 Years', Employer: 'Acme Corp' }
     }
+  ];
+
+  const customCreds = (() => {
+    try {
+      const raw = localStorage.getItem('trustverse_custom_credentials');
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  })();
+
+  const baseCreds = credentials.length > 0 ? credentials : fallbackCreds;
+  const knownIds = new Set(customCreds.map(c => c.credentialId || c.id));
+  const displayCreds = [
+    ...customCreds.map(c => ({
+      ...c,
+      subjectName: c.subjectName || c.claims?.studentName || c.claims?.practitionerName || c.claims?.citizenName || c.claims?.employeeName || 'Document Holder',
+      txHash: c.txHash || c.blockchainTxHash,
+      trustScore: c.trustScore || 0.96
+    })),
+    ...baseCreds.filter(c => !knownIds.has(c.credentialId || c.id))
   ];
 
   return (

@@ -40,7 +40,7 @@ export const HolderDashboard = () => {
   }, [token]);
 
   // Fallback demo credentials if no database credentials exist yet
-  const displayCreds = credentials.length > 0 ? credentials : [
+  const fallbackCreds = [
     {
       id: 'cred_edu_01',
       credentialId: 'cred_edu_2026_001',
@@ -82,6 +82,22 @@ export const HolderDashboard = () => {
         employmentStatus: 'Full Time'
       }
     }
+  ];
+
+  const customCreds = (() => {
+    try {
+      const raw = localStorage.getItem('trustverse_custom_credentials');
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  })();
+
+  const baseCreds = credentials.length > 0 ? credentials : fallbackCreds;
+  const knownIds = new Set(customCreds.map(c => c.credentialId || c.id));
+  const displayCreds = [
+    ...customCreds,
+    ...baseCreds.filter(c => !knownIds.has(c.credentialId || c.id))
   ];
 
   const toggleCard = (id) => {
